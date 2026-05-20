@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: ticket-booking-engine
+
+  main:
+    banner-mode: off
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/${POSTGRES_DB:postgres}}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: false
+
+    properties:
+      hibernate:
+        format_sql: true
+
+        jdbc:
+          batch_size: 50
+
+        order_inserts: true
+        order_updates: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  devtools:
+    restart:
+      enabled: true
+      exclude: static/**,public/**
+
+  docker:
+    compose:
+      skip:
+        in-tests: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET}
