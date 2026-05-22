@@ -1,16 +1,16 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/${POSTGRES_DB:postgres}}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
     username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    password: ${POSTGRES_PASSWORD:dummy_test_password}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
 server:
   port: ${SERVER_PORT:8080}
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${JWT_SECRET:THIS_IS_A_DUMMY_KEY_FOR_TESTING_ONLY_32_CHARS}

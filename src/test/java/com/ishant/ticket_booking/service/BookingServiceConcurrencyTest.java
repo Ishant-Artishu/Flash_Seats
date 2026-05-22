@@ -20,13 +20,15 @@ public class BookingServiceConcurrencyTest {
     // This forces the test to use H2 memory database instead of Postgres
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {
-        // Changed /ticket_booking to /postgres (which is guaranteed to exist)
         registry.add("spring.datasource.url", () -> "jdbc:postgresql://localhost:5432/postgres");
         registry.add("spring.datasource.username", () -> "postgres");
-        registry.add("spring.datasource.password", () -> "Ishu4748");
+        registry.add("spring.datasource.password", () ->
+                System.getenv().getOrDefault("SPRING_DATASOURCE_PASSWORD", "dummy_test_password"));
 
         registry.add("spring.data.redis.host", () -> "localhost");
         registry.add("spring.data.redis.port", () -> "6379");
+
+        registry.add("jwt.secret", () -> "THIS_IS_A_DUMMY_KEY_FOR_TESTING_ONLY_32_CHARS");
     }
 
     @Test
